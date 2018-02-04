@@ -1,0 +1,42 @@
+body {
+  background: $dark;
+  color: white;
+  margin: 5vh 10vw;
+}
+
+.Site {
+  min-height: 90vh;
+  lost-center: 1080px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  &__wrapper {
+
+  }
+}
+
+.skill-list {
+  display: flex;
+  margin-top: .5em;
+
+  li {
+    font-weight: 100;
+    font-size: .875em;
+    margin-right: .7rem;
+
+    &:before {
+      content: '\b7\a0';
+    }
+
+    &:first-child:before {
+      content: "";
+    }
+  }
+}
+
+.Contact {
+  margin-top: 2em;
+  border-top: 1px solid #2a2d42;
+  padding-top: 1em;
+}
