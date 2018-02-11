@@ -1,7 +1,11 @@
 body {
   background: $dark;
   color: white;
-  margin: 5vh 10vw;
+  margin: 3vh 5vw;
+
+  @media screen and (min-width: 768px) {
+    margin: 5vh 10vw;
+  }
 }
 
 .Site {
@@ -10,27 +14,46 @@ body {
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  position: relative;
 
   &__wrapper {
 
   }
 }
 
+.particles-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
 .skill-list {
   display: flex;
+  flex-wrap: wrap;
   margin-top: .5em;
+  flex-direction: column;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+  }
 
   li {
     font-weight: 100;
-    font-size: .875em;
     margin-right: .7rem;
 
     &:before {
+      font-weight: 700;
       content: '\b7\a0';
     }
 
-    &:first-child:before {
-      content: "";
+    @media screen and (min-width: 768px) {
+
+      &:first-child:before {
+        content: "";
+      }
     }
   }
 }
