@@ -36,6 +36,9 @@ const IndexPage = () => (
       <p>
         Github <a href="https://github.com/danieldunderfelt">danieldunderfelt</a>
       </p>
+      <p>
+        Email <strong>daniel@developsuperpowers.com</strong>
+      </p>
     </div>
   </div>
 )
