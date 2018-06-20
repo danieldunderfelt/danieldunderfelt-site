@@ -1,6 +1,4 @@
-// noinspection NpmUsedModulesInstalled
 import React from 'react'
-import Link from 'gatsby-link'
 
 const IndexPage = () => (
   <div>
@@ -10,24 +8,12 @@ const IndexPage = () => (
     </h1>
     <p>Full-stack developer from Helsinki.</p>
     <ul className="skill-list">
-      <li>
-        React
-      </li>
-      <li>
-        React native
-      </li>
-      <li>
-        Node.js
-      </li>
-      <li>
-        Wordpress
-      </li>
-      <li>
-        Laravel
-      </li>
-      <li>
-        Sky's the limit!
-      </li>
+      <li>React</li>
+      <li>React native</li>
+      <li>Node.js</li>
+      <li>Wordpress</li>
+      <li>Laravel</li>
+      <li>Sky's the limit!</li>
     </ul>
     <div className="Contact">
       <p>
