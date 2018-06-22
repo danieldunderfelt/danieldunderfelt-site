@@ -1,45 +1,39 @@
 import React, { PureComponent } from 'react'
 import random from 'lodash/random'
+import get from 'lodash/get'
+import last from 'lodash/last'
 
-const CHARACTERS = ['A', 'B', 'C', 'D', 'E', '#', '£']
-const FPS = 60
-const INTERVAL = 1000 / FPS
+const CHARACTERS = ['1', '0']
+const LETTER_HEIGHT = 20
+const INTERVAL = 1000 / 30
+const MAX_COL_LENGTH = Math.round(window.innerHeight / LETTER_HEIGHT)
+const COL_WIDTH = 30
+
+function createChar() {
+  return {
+    opacity: 1,
+    char: CHARACTERS[random(0, CHARACTERS.length - 1)]
+  }
+}
+
+function createTrack(opacity = random(0.25, 1)) {
+  return {
+    opacity,
+    chars: [createChar()]
+  }
+}
+
+const winWidth = window.innerWidth
 
 class Matrix extends PureComponent {
-  static defaultProps = {
-    columnWidth: 15,
-    baseSpeed: 20,
-    baseOpacity: 0.5
-  }
-
   state = {
     columns: []
   }
 
   raf = 0
   last = 0
-  delta = 0
 
   componentDidMount() {
-    const { columnWidth } = this.props
-
-    const winWidth = window.innerWidth
-    const numberOfColumns = Math.round(winWidth / columnWidth)
-
-    const columns = []
-
-    for (let col = 0; col < numberOfColumns; col++) {
-      columns.push({
-        opacity: random(0.5, 1),
-        added: performance.now(),
-        chars: []
-      })
-    }
-
-    this.setState({
-      columns
-    })
-
     this.renderLoop()
   }
 
@@ -53,11 +47,11 @@ class Matrix extends PureComponent {
     }
 
     this.raf = requestAnimationFrame(this.renderLoop)
-    this.delta = time - this.last
+    let delta = time - this.last
 
-    if (this.delta > INTERVAL) {
-      this.last = time - (this.delta % INTERVAL)
-      this.renderColumns(time)
+    if (delta > INTERVAL) {
+      this.last = time - (delta % INTERVAL)
+      this.renderColumns()
     }
   }
 
@@ -65,71 +59,98 @@ class Matrix extends PureComponent {
     cancelAnimationFrame(this.raf)
   }
 
-  renderColumns = (time) => {
+  renderColumns = () => {
+    const numberOfColumns = Math.round(winWidth / COL_WIDTH)
+
     const { columns } = this.state
-    const nextCols = []
+    const nextColumns = []
 
-    for (let col = 0; col < columns.length; col++) {
-      const column = { ...columns[col] }
-      const columnDelta = time - column.added
-      
-      column.opacity = column.opacity - ((Math.random() * 0.0005) * (columnDelta / 100))
-      
-      if (column.opacity > 0) {
-        column.chars = this.renderColumn(column.chars)
-        nextCols.push(column)
-      } else {
-        nextCols.push({
-          opacity: random(0.75, 1),
-          added: time,
-          chars: []
-        })
+    for (let col = 0; col < numberOfColumns; col++) {
+      let columnTracks = columns[col]
+      const nextColumnTracks = []
+
+      if (!columnTracks) {
+        columnTracks = [createTrack()]
       }
+
+      for (let t = 0; t < columnTracks.length; t++) {
+        const track = { ...columnTracks[t] }
+
+        if (track.opacity > 0.1) {
+          if (track.chars.length > 0) {
+            track.opacity = track.opacity - Math.random() * 0.005
+          }
+
+          const canAddChar = MAX_COL_LENGTH > track.chars.length
+
+          if (canAddChar && Math.random() < 0.25 + t * 0.005) {
+            track.chars.push(createChar())
+          }
+
+          for (let charIdx = 0; charIdx < track.chars.length; charIdx++) {
+            const char = track.chars[charIdx]
+            char.opacity = char.opacity > 0 ? char.opacity - Math.random() * 0.025 : 0
+          }
+
+          nextColumnTracks.push(track)
+        } else {
+          nextColumnTracks.push(createTrack())
+        }
+      }
+
+      if (nextColumnTracks.length < 3) {
+        const lastTrack = last(nextColumnTracks)
+        const lastTrackChars = get(lastTrack, 'chars', [])
+
+        if (get(lastTrack, 'opacity', 1) < 0.5 && lastTrackChars.length > 15) {
+          nextColumnTracks.push(createTrack(1))
+        }
+      }
+
+      nextColumns.push(nextColumnTracks)
     }
-  
+
     this.setState({
-      columns: nextCols
+      columns: nextColumns
     })
-  }
-
-  renderColumn = column => {
-    const character = {
-      opacity: random(0.5, 1),
-      char: CHARACTERS[random(0, CHARACTERS.length - 1)]
-    }
-
-    if (Math.random() > 0.75) {
-      column.push(character)
-    }
-
-    for (let col = 0; col < column.length; col++) {
-      const char = column[col]
-      char.opacity = char.opacity - 0.005
-    }
-
-    return column
   }
 
   render() {
     const { columns } = this.state
-    const { columnWidth } = this.props
 
     return (
       <div className="matrix-bg">
-        {columns.map((col, colIdx) => (
-          <div
-            key={ `col_${colIdx}` }
-            style={{ opacity: col.opacity, width: columnWidth + 'px' }}
-            className="matrix-column">
-            {col.chars.map((char, charIdx) => (
-              <span
-                key={ `col_${colIdx}_char_${charIdx}` }
-                style={{ opacity: char.opacity }}>
-                {char.char}
-              </span>
-            ))}
-          </div>
-        ))}
+        <div className="columns-container">
+          {columns.map((col, colIdx) => (
+            <div
+              style={{
+                width: COL_WIDTH + 'px'
+              }}
+              className="matrix-column"
+              key={`col_${colIdx}`}
+              dangerouslySetInnerHTML={{
+                __html: col
+                  .map(
+                    (track, trackIdx) => `
+                <div
+                  style="opacity: ${track.opacity}; left: ${(COL_WIDTH / 3) * trackIdx}px;"
+                  class="matrix-column-track">
+                  ${track.chars
+                    .map(
+                      char =>
+                        `<span style="opacity: ${
+                          char.opacity
+                        }; width: ${COL_WIDTH}px; height: ${LETTER_HEIGHT}px;">${char.char}</span>`
+                    )
+                    .join('')}
+                </div>
+              `
+                  )
+                  .join('')
+              }}
+            />
+          ))}
+        </div>
       </div>
     )
   }

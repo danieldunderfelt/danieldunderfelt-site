@@ -1,20 +1,41 @@
 .matrix-bg {
   position: fixed;
-  opacity: 1;
+  opacity: 0.5;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  user-select: none;
   pointer-events: none;
+  transform: perspective(1000px) rotateX(7deg) rotateY(-7deg) scale3d(1.15, 1.15, 1.1)
+    translateY(-60px) translateX(-80px);
+}
+
+.columns-container {
+  transform-style: preserve-3d;
   display: flex;
   flex-wrap: nowrap;
+  pointer-events: none;
 }
 
 .matrix-column {
   flex: 1 1 auto;
   height: 100%;
+  position: relative;
+  z-index: 0;
+  transform: translateZ(0);
+}
+
+.matrix-column-track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  font-size: 16px;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  font-size: 14px;
+  transform: translateZ(20px);
 }
