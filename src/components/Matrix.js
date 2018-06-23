@@ -4,38 +4,45 @@ import get from 'lodash/get'
 import last from 'lodash/last'
 
 let win = typeof window !== 'undefined' ? window : {}
+const WIN_WIDTH = get(win, 'innerWidth', 2000)
+const WIN_HEIGHT = get(win, 'innerHeight', 1000)
 
 const CHARACTERS = ['1', '0']
-const LETTER_HEIGHT = 20
+const LETTER_HEIGHT = 15
 const INTERVAL = 1000 / 30
-const MAX_COL_LENGTH = Math.round(get(win, 'innerHeight', 1000) / LETTER_HEIGHT)
-const COL_WIDTH = 30
+const MAX_COL_LENGTH = Math.round(WIN_HEIGHT / LETTER_HEIGHT)
+const COL_WIDTH = 20
+const MAX_TRACKS = 5
 
 function createChar() {
   return {
+    rgb: [random(100, 120), random(100, 230), random(200, 255)],
     opacity: 1,
     char: CHARACTERS[random(0, CHARACTERS.length - 1)]
   }
 }
 
-function createTrack(opacity = random(0.25, 1)) {
+function createTrack() {
   return {
-    opacity,
+    opacity: 1,
     chars: [createChar()]
   }
 }
 
-const winWidth = get(win, 'innerWidth', 2000)
+function getTrackOpacity(track) {
+  return get(last(track.chars), 'opacity', 1)
+}
 
 class Matrix extends PureComponent {
-  state = {
-    columns: []
-  }
-
+  columns = []
   raf = 0
   last = 0
+  canvas = []
+  ctx = []
+  wrapper = null
 
   componentDidMount() {
+    this.ctx = this.canvas.map(canvas => canvas.getContext('2d'))
     this.renderLoop()
   }
 
@@ -53,7 +60,7 @@ class Matrix extends PureComponent {
 
     if (delta > INTERVAL) {
       this.last = time - (delta % INTERVAL)
-      this.renderColumns()
+      this.renderMatrix()
     }
   }
 
@@ -61,13 +68,21 @@ class Matrix extends PureComponent {
     cancelAnimationFrame(this.raf)
   }
 
-  renderColumns = () => {
-    const numberOfColumns = Math.round(winWidth / COL_WIDTH)
+  renderMatrix = () => {
+    const numberOfColumns = Math.round(WIN_WIDTH / COL_WIDTH)
+    const columns = this.columns
 
-    const { columns } = this.state
     const nextColumns = []
 
+    this.ctx.forEach(ctx => {
+      ctx.clearRect(0, 0, WIN_WIDTH, WIN_HEIGHT)
+      ctx.font = '14px "Roboto Mono"'
+    })
+
     for (let col = 0; col < numberOfColumns; col++) {
+      const colX = col * COL_WIDTH
+      const colY = 0
+
       let columnTracks = columns[col]
       const nextColumnTracks = []
 
@@ -75,23 +90,30 @@ class Matrix extends PureComponent {
         columnTracks = [createTrack()]
       }
 
-      for (let t = 0; t < columnTracks.length; t++) {
-        const track = { ...columnTracks[t] }
+      for (let trackIdx = 0; trackIdx < columnTracks.length; trackIdx++) {
+        const ctx = this.ctx[trackIdx]
+        const track = columnTracks[trackIdx]
+        const trackX = Math.round(colX + (COL_WIDTH / 2) * trackIdx)
+        const trackY = colY
 
-        if (track.opacity > 0.1) {
-          if (track.chars.length > 0) {
-            track.opacity = track.opacity - Math.random() * 0.005
-          }
+        const trackOpacity = getTrackOpacity(track)
 
+        if (trackOpacity > 0.1) {
           const canAddChar = MAX_COL_LENGTH > track.chars.length
 
-          if (canAddChar && Math.random() < 0.25 + t * 0.005) {
+          if (canAddChar && Math.random() < 0.5 - track.chars.length * 0.001) {
             track.chars.push(createChar())
           }
 
           for (let charIdx = 0; charIdx < track.chars.length; charIdx++) {
             const char = track.chars[charIdx]
-            char.opacity = char.opacity > 0 ? char.opacity - Math.random() * 0.025 : 0
+            char.opacity = char.opacity > 0 ? char.opacity - Math.random() * 0.05 : 0
+
+            const charX = trackX
+            const charY = Math.round(trackY + LETTER_HEIGHT * charIdx)
+
+            ctx.fillStyle = `rgba(${char.rgb.join(', ')}, ${char.opacity})`
+            ctx.fillText(char.char, charX, charY)
           }
 
           nextColumnTracks.push(track)
@@ -100,11 +122,11 @@ class Matrix extends PureComponent {
         }
       }
 
-      if (nextColumnTracks.length < 3) {
+      if (nextColumnTracks.length < MAX_TRACKS) {
         const lastTrack = last(nextColumnTracks)
-        const lastTrackChars = get(lastTrack, 'chars', [])
+        const trackOpacity = getTrackOpacity(lastTrack)
 
-        if (get(lastTrack, 'opacity', 1) < 0.5 && lastTrackChars.length > 15) {
+        if (trackOpacity < 0.5 || lastTrack.chars.length > 20) {
           nextColumnTracks.push(createTrack(1))
         }
       }
@@ -112,47 +134,32 @@ class Matrix extends PureComponent {
       nextColumns.push(nextColumnTracks)
     }
 
-    this.setState({
-      columns: nextColumns
-    })
+    this.columns = nextColumns
+  }
+
+  shouldComponentUpdate() {
+    return false
   }
 
   render() {
-    const { columns } = this.state
+    const canvases = []
+
+    for (let c = 0; c < MAX_TRACKS; c++) {
+      canvases.push(
+        <canvas
+          style={{ transform: `translateZ(${c * 50}px)`, opacity: 0.4 + (c * 0.15) }}
+          key={`canvas_${c}`}
+          width={WIN_WIDTH}
+          height={WIN_HEIGHT}
+          ref={ref => this.canvas.push(ref)}
+          className="matrix-canvas"
+        />
+      )
+    }
 
     return (
       <div className="matrix-bg">
-        <div className="columns-container">
-          {columns.map((col, colIdx) => (
-            <div
-              style={{
-                width: COL_WIDTH + 'px'
-              }}
-              className="matrix-column"
-              key={`col_${colIdx}`}
-              dangerouslySetInnerHTML={{
-                __html: col
-                  .map(
-                    (track, trackIdx) => `
-                <div
-                  style="opacity: ${track.opacity}; left: ${(COL_WIDTH / 3) * trackIdx}px;"
-                  class="matrix-column-track">
-                  ${track.chars
-                    .map(
-                      char =>
-                        `<span style="opacity: ${
-                          char.opacity
-                        }; width: ${COL_WIDTH}px; height: ${LETTER_HEIGHT}px;">${char.char}</span>`
-                    )
-                    .join('')}
-                </div>
-              `
-                  )
-                  .join('')
-              }}
-            />
-          ))}
-        </div>
+        { canvases }
       </div>
     )
   }

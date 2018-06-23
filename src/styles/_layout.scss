@@ -17,12 +17,6 @@ body {
   position: relative;
 }
 
-.Site__wrapper {
-  * {
-    text-shadow: 0 0 10px $dark;
-  }
-}
-
 .skill-list {
   display: flex;
   flex-wrap: wrap;

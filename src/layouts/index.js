@@ -25,8 +25,8 @@ class TemplateWrapper extends Component {
             }
           ]}
         />
-        <Matrix />
         <div className="Site">
+          <Matrix />
           <div
             className="Site__wrapper">
             {children()}
