@@ -1,20 +1,20 @@
 body {
   background-image: linear-gradient(to top, darken($dark, 10%), lighten($dark, 10%));
   color: white;
-  margin: 3vh 5vw;
-
-  @media screen and (min-width: 768px) {
-    margin: 5vh 10vw;
-  }
 }
 
 .Site {
-  min-height: 90vh;
+  min-height: 100vh;
   lost-center: 1080px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   position: relative;
+  padding: 3vh 5vw;
+
+  @media screen and (min-width: 768px) {
+    padding: 5vh 10vw;
+  }
 }
 
 .skill-list {
