@@ -3,10 +3,12 @@ import random from 'lodash/random'
 import get from 'lodash/get'
 import last from 'lodash/last'
 
+let win = typeof window !== 'undefined' ? window : {}
+
 const CHARACTERS = ['1', '0']
 const LETTER_HEIGHT = 20
 const INTERVAL = 1000 / 30
-const MAX_COL_LENGTH = Math.round(window.innerHeight / LETTER_HEIGHT)
+const MAX_COL_LENGTH = Math.round(get(win, 'innerHeight', 1000) / LETTER_HEIGHT)
 const COL_WIDTH = 30
 
 function createChar() {
@@ -23,7 +25,7 @@ function createTrack(opacity = random(0.25, 1)) {
   }
 }
 
-const winWidth = window.innerWidth
+const winWidth = get(win, 'innerWidth', 2000)
 
 class Matrix extends PureComponent {
   state = {

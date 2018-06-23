@@ -4,11 +4,8 @@
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
   user-select: none;
   pointer-events: none;
-  transform: perspective(1000px) rotateX(7deg) rotateY(-7deg) scale3d(1.15, 1.15, 1.1)
-    translateY(-60px) translateX(-80px);
 }
 
 .columns-container {
@@ -16,6 +13,8 @@
   display: flex;
   flex-wrap: nowrap;
   pointer-events: none;
+  transform: perspective(1000px) rotateX(7deg) rotateY(-7deg) scale3d(1.1, 1.1, 1.1)
+    translateY(-4vh) translateX(-5vw);
 }
 
 .matrix-column {
@@ -37,5 +36,11 @@
   font-size: 16px;
   display: flex;
   flex-direction: column;
-  transform: translateZ(20px);
+  transform: translateZ(0);
+
+  @for $i from 2 through 5 {
+    &:nth-child(#{$i}) {
+      transform: translateZ(20px * $i);
+    }
+  }
 }
