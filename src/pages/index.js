@@ -6,7 +6,7 @@ class IndexPage extends React.Component {
       <div>
         <h1 className="MegaHeading">
           Daniel<br />
-          Dunderfelt
+          <strong>Dunderfelt</strong>
         </h1>
         <p>Full-stack developer from Helsinki.</p>
         <ul className="skill-list">

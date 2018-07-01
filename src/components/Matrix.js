@@ -8,11 +8,11 @@ const WIN_WIDTH = get(win, 'innerWidth', 2000)
 const WIN_HEIGHT = get(win, 'innerHeight', 1000)
 
 const CHARACTERS = ['1', '0']
-const LETTER_HEIGHT = 15
+const LETTER_HEIGHT = 20
 const INTERVAL = 1000 / 30
 const MAX_COL_LENGTH = Math.round(WIN_HEIGHT / LETTER_HEIGHT)
-const COL_WIDTH = 20
-const MAX_TRACKS = 5
+const COL_WIDTH = 25
+const MAX_TRACKS = 3
 
 function createChar() {
   return {

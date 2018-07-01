@@ -1,19 +1,22 @@
 body {
   background-image: linear-gradient(to top, darken($dark, 10%), lighten($dark, 10%));
   color: white;
+  margin: 3vh 5vw;
+
+  @media screen and (min-width: 768px) {
+    margin: 5vh 7.5vw;
+  }
 }
 
 .Site {
-  min-height: 100vh;
+  min-height: 94vh;
   lost-center: 1080px;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  position: relative;
-  padding: 3vh 5vw;
+  justify-content: center;
 
   @media screen and (min-width: 768px) {
-    padding: 5vh 10vw;
+    min-height: 90vh;
   }
 }
 
@@ -25,10 +28,12 @@ body {
 
   @media screen and (min-width: 768px) {
     flex-direction: row;
+    flex-wrap: nowrap;
   }
 
   li {
-    font-weight: 100;
+    white-space: nowrap;
+    font-weight: 300;
     margin-right: .7rem;
 
     &:before {
@@ -37,6 +42,7 @@ body {
     }
 
     @media screen and (min-width: 768px) {
+      font-weight: 100;
 
       &:first-child:before {
         content: "";
