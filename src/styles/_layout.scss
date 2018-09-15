@@ -1,58 +1,105 @@
 body {
-  background-image: linear-gradient(to top, darken($dark, 10%), lighten($dark, 10%));
-  color: white;
+  background-image: linear-gradient(to top, darken($dark, 10%), lighten($dark, 7%));
+}
+
+.Site-container {
+}
+
+.Page-container {}
+
+.Hero {
+  display: flex;
+  align-items: center;
+  min-height: 94vh;
   margin: 3vh 5vw;
 
   @media screen and (min-width: 768px) {
     margin: 5vh 7.5vw;
-  }
-}
-
-.Site {
-  min-height: 94vh;
-  lost-center: 1080px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  @media screen and (min-width: 768px) {
     min-height: 90vh;
   }
 }
 
-.skill-list {
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: .5em;
-  flex-direction: column;
+.Header {
+  width: calc(100% - 3rem);
+  margin: 1.5rem 0 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid #2a2d42;
+  overflow: visible;
 
   @media screen and (min-width: 768px) {
-    flex-direction: row;
-    flex-wrap: nowrap;
-  }
+    top: 0;
+    left: 0;
+    position: absolute;
+    padding: 1.25rem 0 1.5rem;
+    margin: 0 1.5rem;
+    border-top: 0;
+    border-bottom: 1px solid #2a2d42;
 
-  li {
-    white-space: nowrap;
-    font-weight: 300;
-    margin-right: .7rem;
-
-    &:before {
-      font-weight: 700;
-      content: '\b7\a0';
-    }
-
-    @media screen and (min-width: 768px) {
-      font-weight: 100;
-
-      &:first-child:before {
-        content: "";
-      }
+    p {
+      margin: 0;
     }
   }
 }
 
 .Contact {
-  margin-top: 2em;
-  padding-top: 2em;
-  border-top: 1px solid #2a2d42;
+  @media screen and (min-width: 768px) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  a, strong {
+    color: inherit;
+    font-weight: 300;
+
+    &:visited {
+      color: inherit;
+    }
+  }
+
+  p {
+    display: flex;
+    align-items: center;
+  }
+
+  svg {
+    flex: none;
+    margin-right: 1rem;
+  }
+}
+
+.Content {
+  flex: 1 1 auto;
+  max-width: 1080px;
+  margin: auto;
+  text-align: center;
+}
+
+.skill-list {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+
+  &:first-of-type {
+    margin-top: 2rem;
+  }
+
+  @media screen and (min-width: 768px) {
+    justify-content: center;
+    flex-direction: row;
+  }
+
+  li {
+    white-space: nowrap;
+    margin-right: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  img, svg {
+    width: 30px;
+    height: 30px;
+    vertical-align: -4px;
+    margin-right: 0.5rem;
+  }
 }

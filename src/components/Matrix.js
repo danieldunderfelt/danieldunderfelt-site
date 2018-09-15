@@ -8,8 +8,9 @@ const WIN_WIDTH = get(win, 'innerWidth', 2000)
 const WIN_HEIGHT = get(win, 'innerHeight', 1000)
 
 const CHARACTERS = ['1', '0']
+const LETTER_SIZE = 18
 const LETTER_HEIGHT = 20
-const INTERVAL = 1000 / 30
+const INTERVAL = 120
 const MAX_COL_LENGTH = Math.round(WIN_HEIGHT / LETTER_HEIGHT)
 const COL_WIDTH = 25
 const MAX_TRACKS = 3
@@ -76,7 +77,7 @@ class Matrix extends PureComponent {
 
     this.ctx.forEach(ctx => {
       ctx.clearRect(0, 0, WIN_WIDTH, WIN_HEIGHT)
-      ctx.font = '14px "Roboto Mono"'
+      ctx.font = `${LETTER_SIZE}px "Roboto Mono"`
     })
 
     for (let col = 0; col < numberOfColumns; col++) {

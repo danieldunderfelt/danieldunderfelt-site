@@ -5,7 +5,7 @@ import '../styles/reset.css'
 import '../styles/main.scss'
 import Matrix from '../components/Matrix'
 
-class TemplateWrapper extends Component {
+class Layout extends Component {
   static propTypes = {
     children: PropTypes.func
   }
@@ -14,7 +14,7 @@ class TemplateWrapper extends Component {
     const { children } = this.props
 
     return (
-      <div>
+      <div className="Site-container">
         <Helmet
           title="Daniel Dunderfelt"
           meta={[
@@ -25,16 +25,13 @@ class TemplateWrapper extends Component {
             }
           ]}
         />
-        <div className="Site">
-          <Matrix />
-          <div
-            className="Site__wrapper">
-            {children()}
-          </div>
+        <Matrix />
+        <div className="Page-container">
+          { children }
         </div>
       </div>
     )
   }
 }
 
-export default TemplateWrapper
+export default Layout

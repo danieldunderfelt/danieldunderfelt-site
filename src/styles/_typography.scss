@@ -1,29 +1,26 @@
 html {
-  font-family: "Roboto mono", monospace;
+  font-family: "Source Code Pro", sans-serif;
   font-size: 18px;
-  font-weight: 400;
+  font-weight: 300;
+  color: white;
 }
 
-.MegaHeading {
-  font-weight: 300;
-  font-size: 10vmin;
-  line-height: 1;
-  margin-bottom: 3rem;
+.MainHeading {
+  font-weight: 100;
+  font-size: 10.5vmin;
+  line-height: 1.2;
   text-indent: -1px;
+  color: #ededed;
+  margin-bottom: 1.5rem;
 
   strong {
-    font-weight: 900;
-    font-size: 12vmin;
-    text-transform: uppercase;
+    font-weight: 700;
   }
 
   @media screen and (min-width: 768px) {
     font-size: 5vw;
     font-weight: 100;
-
-    strong {
-      font-size: 7vw;
-    }
+    margin-bottom: 4rem;
   }
 }
 
@@ -35,11 +32,15 @@ h2 {
   font-size: 2vw;
 }
 
-p, li {
-  font-size: 3.5vmin;
+.Content {
+  font-size: 4vmin;
+
+  @media screen and (min-width: 600px) {
+    font-size: 3vmin;
+  }
 
   @media screen and (min-width: 768px) {
-    font-size: 2vmin;
+    font-size: 2.5vmin;
   }
 }
 
@@ -58,4 +59,12 @@ p {
 a {
   color: cornflowerblue;
   font-weight: 700;
+}
+
+.Contact p {
+  font-size: 1rem;
+
+  @media screen and (min-width: 768px) {
+    font-size: 1rem;
+  }
 }
