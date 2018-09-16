@@ -5,14 +5,11 @@ module.exports = {
   plugins: [
     'gatsby-plugin-react-helmet',
     {
-      resolve: 'gatsby-plugin-web-font-loader',
+      resolve: 'gatsby-plugin-prefetch-google-fonts',
       options: {
-        google: {
-          families: [
-            'roboto mono\:100,300,400,700',
-            'source code pro\:200,400,700'
-          ]
-        }
+        fonts: [
+          { family: 'Source Code Pro', variants: ['300', '700'] }
+        ]
       }
     },
     'gatsby-plugin-sass',

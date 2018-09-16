@@ -77,7 +77,7 @@ class Matrix extends PureComponent {
 
     this.ctx.forEach(ctx => {
       ctx.clearRect(0, 0, WIN_WIDTH, WIN_HEIGHT)
-      ctx.font = `${LETTER_SIZE}px "Roboto Mono"`
+      ctx.font = `${LETTER_SIZE}px "Source Code Pro"`
     })
 
     for (let col = 0; col < numberOfColumns; col++) {

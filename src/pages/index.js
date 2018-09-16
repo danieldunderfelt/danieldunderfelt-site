@@ -23,7 +23,7 @@ class IndexPage extends React.Component {
               <ul className="skill-list">
                 <li><FaJs color="#f5da55" /> Javascript</li>
                 <li><FaReact color="#61dafb" /> React</li>
-                <li><img src={ graphQlLogo } /> GraphQL</li>
+                <li><img src={ graphQlLogo } alt="GraphQL logo" /> GraphQL</li>
                 <li><FaNodeJs color="#43853d" /> Node.js</li>
               </ul>
               <ul className="skill-list">
@@ -36,6 +36,9 @@ class IndexPage extends React.Component {
               <Contact />
             </header>
           </Content>
+          <footer className="Hero-footer">
+            Yes, that's a "matrix" effect in the background. Because I wanted to make one.
+          </footer>
         </Hero>
       </Layout>
     )
