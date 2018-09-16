@@ -3145,6 +3145,12 @@ dom-serializer@0:
     domelementtype "~1.1.1"
     entities "~1.1.1"
 
+dom-urls@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/dom-urls/-/dom-urls-1.1.0.tgz#001ddf81628cd1e706125c7176f53ccec55d918e"
+  dependencies:
+    urijs "^1.16.1"
+
 dom-walk@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/dom-walk/-/dom-walk-0.1.1.tgz#672226dc74c8f799ad35307df936aba11acd6018"
@@ -3371,6 +3377,10 @@ es-to-primitive@^1.1.1:
     is-callable "^1.1.1"
     is-date-object "^1.0.1"
     is-symbol "^1.0.1"
+
+es6-promise@^4.0.5:
+  version "4.2.5"
+  resolved "https://registry.yarnpkg.com/es6-promise/-/es6-promise-4.2.5.tgz#da6d0d5692efb461e082c14817fe2427d8f5d054"
 
 escape-html@~1.0.3:
   version "1.0.3"
@@ -4209,6 +4219,13 @@ gatsby-plugin-netlify@next:
     kebab-hash "^0.1.2"
     lodash "^4.17.10"
     webpack-assets-manifest "^3.0.2"
+
+gatsby-plugin-offline@^1.0.18:
+  version "1.0.18"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-offline/-/gatsby-plugin-offline-1.0.18.tgz#2ee2a24d2f69fcc43a015132f07141b69295318d"
+  dependencies:
+    babel-runtime "^6.26.0"
+    sw-precache "^5.0.0"
 
 gatsby-plugin-page-creator@^2.0.0-rc.5:
   version "2.0.0-rc.5"
@@ -5750,6 +5767,10 @@ lodash-es@^4.2.1:
   version "4.17.11"
   resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.11.tgz#145ab4a7ac5c5e52a3531fb4f310255a152b4be0"
 
+lodash._reinterpolate@~3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/lodash._reinterpolate/-/lodash._reinterpolate-3.0.0.tgz#0ccf2d89166af03b3663c796538b75ac6e114d9d"
+
 lodash.assign@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/lodash.assign/-/lodash.assign-4.2.0.tgz#0d99f3ccd7a6d261d19bdaeb9245005d285808e7"
@@ -5765,6 +5786,10 @@ lodash.clonedeep@^4.3.2:
 lodash.debounce@^4.0.8:
   version "4.0.8"
   resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
+
+lodash.defaults@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/lodash.defaults/-/lodash.defaults-4.2.0.tgz#d09178716ffea4dde9e5fb7b37f6f0802274580c"
 
 lodash.every@^4.6.0:
   version "4.6.0"
@@ -5813,6 +5838,19 @@ lodash.mergewith@^4.6.0:
 lodash.tail@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/lodash.tail/-/lodash.tail-4.1.1.tgz#d2333a36d9e7717c8ad2f7cacafec7c32b444664"
+
+lodash.template@^4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/lodash.template/-/lodash.template-4.4.0.tgz#e73a0385c8355591746e020b99679c690e68fba0"
+  dependencies:
+    lodash._reinterpolate "~3.0.0"
+    lodash.templatesettings "^4.0.0"
+
+lodash.templatesettings@^4.0.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/lodash.templatesettings/-/lodash.templatesettings-4.1.0.tgz#2b4d4e95ba440d915ff08bc899e4553666713316"
+  dependencies:
+    lodash._reinterpolate "~3.0.0"
 
 lodash.toarray@^4.4.0:
   version "4.4.0"
@@ -6872,6 +6910,12 @@ path-to-regexp@0.1.7:
   version "0.1.7"
   resolved "https://registry.yarnpkg.com/path-to-regexp/-/path-to-regexp-0.1.7.tgz#df604178005f522f15eb4490e7247a1bfaa67f8c"
 
+path-to-regexp@^1.0.1:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/path-to-regexp/-/path-to-regexp-1.7.0.tgz#59fde0f435badacba103a84e9d3bc64e96b9937d"
+  dependencies:
+    isarray "0.0.1"
+
 path-type@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/path-type/-/path-type-1.1.0.tgz#59c44f7ee491da704da415da5a4070ba4f8fe441"
@@ -7305,6 +7349,10 @@ preserve@^0.2.0:
 prettier@^1.14.2:
   version "1.14.2"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.14.2.tgz#0ac1c6e1a90baa22a62925f41963c841983282f9"
+
+pretty-bytes@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/pretty-bytes/-/pretty-bytes-4.0.2.tgz#b2bf82e7350d65c6c33aa95aaa5a4f6327f61cd9"
 
 pretty-error@^2.1.1:
   version "2.1.1"
@@ -8162,6 +8210,10 @@ serve-static@1.13.2:
     parseurl "~1.3.2"
     send "0.16.2"
 
+serviceworker-cache-polyfill@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/serviceworker-cache-polyfill/-/serviceworker-cache-polyfill-4.0.0.tgz#de19ee73bef21ab3c0740a37b33db62464babdeb"
+
 set-blocking@^2.0.0, set-blocking@~2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/set-blocking/-/set-blocking-2.0.0.tgz#045f9782d011ae9a6803ddd382b24392b3d890f7"
@@ -8705,6 +8757,28 @@ svgo@^1.0.0:
     unquote "~1.1.1"
     util.promisify "~1.0.0"
 
+sw-precache@^5.0.0:
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/sw-precache/-/sw-precache-5.2.1.tgz#06134f319eec68f3b9583ce9a7036b1c119f7179"
+  dependencies:
+    dom-urls "^1.1.0"
+    es6-promise "^4.0.5"
+    glob "^7.1.1"
+    lodash.defaults "^4.2.0"
+    lodash.template "^4.4.0"
+    meow "^3.7.0"
+    mkdirp "^0.5.1"
+    pretty-bytes "^4.0.2"
+    sw-toolbox "^3.4.0"
+    update-notifier "^2.3.0"
+
+sw-toolbox@^3.4.0:
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/sw-toolbox/-/sw-toolbox-3.6.0.tgz#26df1d1c70348658e4dea2884319149b7b3183b5"
+  dependencies:
+    path-to-regexp "^1.0.1"
+    serviceworker-cache-polyfill "^4.0.0"
+
 symbol-observable@^1.0.3:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
@@ -9112,6 +9186,10 @@ uri-js@^4.2.2:
   resolved "https://registry.yarnpkg.com/uri-js/-/uri-js-4.2.2.tgz#94c540e1ff772956e2299507c010aea6c8838eb0"
   dependencies:
     punycode "^2.1.0"
+
+urijs@^1.16.1:
+  version "1.19.1"
+  resolved "https://registry.yarnpkg.com/urijs/-/urijs-1.19.1.tgz#5b0ff530c0cbde8386f6342235ba5ca6e995d25a"
 
 urix@^0.1.0:
   version "0.1.0"
