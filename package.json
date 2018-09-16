@@ -8,6 +8,7 @@
     "color": "^3.0.0",
     "gatsby": "next",
     "gatsby-plugin-catch-links": "next",
+    "gatsby-plugin-google-analytics": "^1.0.31",
     "gatsby-plugin-google-fonts": "^0.0.4",
     "gatsby-plugin-netlify": "next",
     "gatsby-plugin-postcss-sass": "next",
